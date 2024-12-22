@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { projects } from '@/data/projects'
 
@@ -14,14 +16,14 @@ export default function ProjectsPage() {
           {projects.map((project, i) => (
             <article 
               key={project.id} 
-              className="project-card animate-in"
+              className="animate-in hover:transform hover:-translate-y-1 transition-all duration-300" 
               style={{ animationDelay: `${i * 100}ms` }}
             >
               <Link href={`/projects/${project.id}`}>
-                <div className="glass-card rounded-xl p-8">
+                <div className="glass-card rounded-xl p-8 group">
                   <div className="flex flex-col gap-4">
                     <div className="flex justify-between items-start">
-                      <h2 className="text-2xl font-semibold text-foreground">
+                      <h2 className="text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
                         {project.title}
                       </h2>
                       <span className="text-sm text-primary">{project.duration}</span>

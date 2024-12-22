@@ -7,16 +7,16 @@
   --foreground: 222 47% 11%;
   --card: 0 0% 98%;
   --card-foreground: 222 47% 11%;
-  --primary: 150 100% 50%; /* Neon green */
+  --primary: 150 100% 50%;
   --primary-foreground: 210 40% 98%;
   --secondary: 220 14% 96%;
   --secondary-foreground: 220.9 39.3% 11%;
   --muted: 220 14% 96%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 150 100% 50%; /* Neon green */
+  --accent: 150 100% 50%;
   --accent-foreground: 220.9 39.3% 11%;
   --border: 220 13% 91%;
-  --glow: 150 100% 50%; /* Neon green glow */
+  --glow: 150 100% 50%;
 }
 
 .dark {
@@ -24,7 +24,7 @@
   --foreground: 210 40% 98%;
   --card: 222 47% 6%;
   --card-foreground: 210 40% 98%;
-  --primary: 150 100% 60%; /* Brighter neon green for dark mode */
+  --primary: 150 100% 60%;
   --primary-foreground: 210 40% 98%;
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
@@ -42,7 +42,6 @@
   }
 }
 
-/* Glassmorphism Card */
 .glass-card {
   background: linear-gradient(
     to bottom right,
@@ -55,66 +54,12 @@
 }
 
 .glass-card:hover {
-  transform: translateY(-4px);
   border-color: hsl(var(--primary) / 0.5);
   box-shadow: 
     0 20px 40px -8px hsl(var(--glow) / 0.2),
     0 0 20px -4px hsl(var(--glow) / 0.3);
 }
 
-/* Project Card with Mouse Follow Effect */
-.project-card {
-  position: relative;
-}
-
-.project-card::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: radial-gradient(
-    800px circle at var(--mouse-x) var(--mouse-y),
-    hsl(var(--primary) / 0.15),
-    transparent 40%
-  );
-  border-radius: 0.75rem;
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.project-card:hover::after {
-  opacity: 1;
-}
-
-/* Blog Post Styles */
-.blog-content {
-  @apply prose dark:prose-invert prose-lg max-w-none;
-  @apply prose-headings:text-foreground;
-  @apply prose-p:text-muted-foreground prose-p:leading-relaxed;
-  @apply prose-strong:text-foreground prose-strong:font-semibold;
-  @apply prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80;
-  @apply prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground;
-  @apply prose-ul:text-muted-foreground prose-ol:text-muted-foreground;
-  @apply prose-li:marker:text-primary;
-}
-
-/* Gradient Background */
-.gradient-bg {
-  background: 
-    radial-gradient(
-      circle at top right,
-      hsl(var(--primary) / 0.1),
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      hsl(var(--primary) / 0.05),
-      transparent 50%
-    );
-}
-
-/* Animations */
 .animate-in {
   animation: fadeIn 0.5s ease-out forwards;
 }
@@ -130,26 +75,16 @@
   }
 }
 
-/* Blog List Item */
-.blog-item {
-  @apply glass-card rounded-xl p-6 transition-all duration-300;
-}
-
-.blog-item:hover {
-  @apply transform -translate-y-1;
-  box-shadow: 
-    0 20px 40px -8px hsl(var(--glow) / 0.2),
-    0 0 20px -4px hsl(var(--glow) / 0.3);
-}
-
-/* Tech Tags */
-.tech-tag {
-  @apply px-3 py-1 rounded-full text-sm;
-  background: linear-gradient(
-    to right,
-    hsl(var(--primary) / 0.1),
-    hsl(var(--primary) / 0.05)
-  );
-  border: 1px solid hsl(var(--primary) / 0.2);
-  color: hsl(var(--primary));
+.gradient-bg {
+  background: 
+    radial-gradient(
+      circle at top right,
+      hsl(var(--primary) / 0.1),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      hsl(var(--primary) / 0.05),
+      transparent 50%
+    );
 }
