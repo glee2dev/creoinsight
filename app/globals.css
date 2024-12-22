@@ -7,16 +7,16 @@
   --foreground: 222 47% 11%;
   --card: 0 0% 98%;
   --card-foreground: 222 47% 11%;
-  --primary: 150 100% 50%;
+  --primary: 150 100% 50%; /* Neon green */
   --primary-foreground: 210 40% 98%;
   --secondary: 220 14% 96%;
   --secondary-foreground: 220.9 39.3% 11%;
   --muted: 220 14% 96%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 150 100% 50%;
+  --accent: 150 100% 50%; /* Neon green */
   --accent-foreground: 220.9 39.3% 11%;
   --border: 220 13% 91%;
-  --glow: 150 100% 50%;
+  --glow: 150 100% 50%; /* Neon green glow */
 }
 
 .dark {
@@ -24,13 +24,13 @@
   --foreground: 210 40% 98%;
   --card: 222 47% 6%;
   --card-foreground: 210 40% 98%;
-  --primary: 150 100% 60%;
+  --primary: 150 100% 60%; /* Brighter neon green for dark mode */
   --primary-foreground: 210 40% 98%;
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
-  --accent: 150 100% 60%;
+  --accent: 150 100% 60%; /* Brighter neon green for dark mode */
   --accent-foreground: 210 40% 98%;
   --border: 217.2 32.6% 17.5%;
   --glow: 150 100% 60%;
@@ -54,10 +54,35 @@
 }
 
 .glass-card:hover {
+  transform: translateY(-4px);
   border-color: hsl(var(--primary) / 0.5);
   box-shadow: 
     0 20px 40px -8px hsl(var(--glow) / 0.2),
     0 0 20px -4px hsl(var(--glow) / 0.3);
+}
+
+.blog-content {
+  @apply space-y-6;
+}
+
+.blog-content h2 {
+  @apply text-2xl font-bold mt-8 mb-4 text-primary;
+}
+
+.blog-content h3 {
+  @apply text-xl font-semibold mt-6 mb-3 text-primary;
+}
+
+.blog-content p {
+  @apply text-muted-foreground leading-relaxed;
+}
+
+.blog-content ul {
+  @apply list-disc list-inside space-y-2 text-muted-foreground ml-4;
+}
+
+.blog-content ol {
+  @apply list-decimal list-inside space-y-2 text-muted-foreground ml-4;
 }
 
 .animate-in {
@@ -87,4 +112,29 @@
       hsl(var(--primary) / 0.05),
       transparent 50%
     );
+}
+
+/* Card hover effect */
+.project-card {
+  position: relative;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsl(var(--primary) / 0.15),
+    transparent 40%
+  );
+  border-radius: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.project-card:hover::after {
+  opacity: 1;
 }
