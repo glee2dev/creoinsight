@@ -1,9 +1,26 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { projects } from '@/data/projects'
 
 export default function ProjectsPage() {
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      const cards = document.querySelectorAll<HTMLElement>('.project-card')
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+        card.style.setProperty('--mouse-x', `${x}px`)
+        card.style.setProperty('--mouse-y', `${y}px`)
+      })
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    return () => document.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
   return (
     <div className="pt-24 pb-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,14 +33,14 @@ export default function ProjectsPage() {
           {projects.map((project, i) => (
             <article 
               key={project.id} 
-              className="animate-in hover:transform hover:-translate-y-1 transition-all duration-300" 
+              className="project-card animate-in" 
               style={{ animationDelay: `${i * 100}ms` }}
             >
               <Link href={`/projects/${project.id}`}>
-                <div className="glass-card rounded-xl p-8 group">
+                <div className="glass-card rounded-xl p-8">
                   <div className="flex flex-col gap-4">
                     <div className="flex justify-between items-start">
-                      <h2 className="text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                      <h2 className="text-2xl font-semibold text-foreground">
                         {project.title}
                       </h2>
                       <span className="text-sm text-primary">{project.duration}</span>
