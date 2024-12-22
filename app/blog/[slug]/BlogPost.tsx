@@ -14,6 +14,8 @@ export default function BlogPost({ slug }: BlogPostProps) {
   const [activeHeading, setActiveHeading] = useState('')
 
   useEffect(() => {
+    if (!post) return
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,7 +33,24 @@ export default function BlogPost({ slug }: BlogPostProps) {
     return () => headings.forEach(heading => observer.unobserve(heading))
   }, [post])
 
-  if (!post) return <div>Post not found</div>
+  if (!post) {
+    return (
+      <div className="pt-24 pb-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="glass-card rounded-xl p-8">
+            <h1 className="text-2xl font-bold">Post not found</h1>
+            <Link 
+              href="/blog" 
+              className="mt-4 inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+            >
+              <ArrowLeftIcon className="w-4 h-4 mr-2" />
+              Back to Blog
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="pt-24 pb-16">
@@ -44,14 +63,14 @@ export default function BlogPost({ slug }: BlogPostProps) {
           Back to Blog
         </Link>
 
-        <article>
+        <article className="glass-card rounded-xl p-8">
           <header className="mb-12">
-            <div className="flex items-center gap-3 text-sm text-muted-foreground mb-6">
+            <div className="flex items-center gap-3 text-sm mb-6">
               <span className="text-primary font-medium">{post.category}</span>
-              <span>•</span>
-              <time>{post.date}</time>
-              <span>•</span>
-              <span>{post.readTime}</span>
+              <span className="text-muted-foreground">•</span>
+              <time className="text-muted-foreground">{post.date}</time>
+              <span className="text-muted-foreground">•</span>
+              <span className="text-muted-foreground">{post.readTime}</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold mb-8">
@@ -64,14 +83,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
           </header>
 
           <div 
-            className="prose dark:prose-invert prose-lg max-w-none
-              prose-headings:text-foreground 
-              prose-p:text-muted-foreground prose-p:leading-relaxed
-              prose-strong:text-foreground prose-strong:font-semibold
-              prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80
-              prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground
-              prose-ul:text-muted-foreground prose-ol:text-muted-foreground
-              prose-li:marker:text-primary"
+            className="blog-content"
             dangerouslySetInnerHTML={{ 
               __html: post.content.replace(/<h([23])>(.*?)<\/h\1>/g, (_, level, content) => {
                 const id = content.toLowerCase().replace(/\s+/g, '-')

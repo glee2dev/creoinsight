@@ -3,30 +3,28 @@
 @tailwind utilities;
 
 :root {
-  /* Light mode colors */
   --background: 0 0% 100%;
   --foreground: 222 47% 11%;
   --card: 0 0% 98%;
   --card-foreground: 222 47% 11%;
-  --primary: 222 83% 45%;
+  --primary: 150 100% 50%; /* Neon green */
   --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222 47% 11%;
-  --muted: 210 40% 96.1%;
+  --secondary: 220 14% 96%;
+  --secondary-foreground: 220.9 39.3% 11%;
+  --muted: 220 14% 96%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 222 83% 45%;
-  --accent-foreground: 222 47% 11%;
-  --border: 214.3 31.8% 91.4%;
-  --glow: 222 83% 45%;
+  --accent: 150 100% 50%; /* Neon green */
+  --accent-foreground: 220.9 39.3% 11%;
+  --border: 220 13% 91%;
+  --glow: 150 100% 50%; /* Neon green glow */
 }
 
 .dark {
-  /* Dark mode colors - keeping your existing dark theme */
   --background: 222 47% 4%;
   --foreground: 210 40% 98%;
   --card: 222 47% 6%;
   --card-foreground: 210 40% 98%;
-  --primary: 150 100% 60%;
+  --primary: 150 100% 60%; /* Brighter neon green for dark mode */
   --primary-foreground: 210 40% 98%;
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
@@ -38,21 +36,22 @@
   --glow: 150 100% 60%;
 }
 
-/* Update glass card styles for better light mode visibility */
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Glassmorphism Card */
 .glass-card {
   background: linear-gradient(
     to bottom right,
-    hsl(var(--card) / 0.9),
-    hsl(var(--card) / 0.8)
+    hsl(var(--card) / 0.8),
+    hsl(var(--card) / 0.5)
   );
   backdrop-filter: blur(12px);
   border: 1px solid hsl(var(--border));
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.light .glass-card {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05),
-              0 2px 4px -2px rgb(0 0 0 / 0.05);
 }
 
 .glass-card:hover {
@@ -63,7 +62,11 @@
     0 0 20px -4px hsl(var(--glow) / 0.3);
 }
 
-/* Update project card hover effect for light mode */
+/* Project Card with Mouse Follow Effect */
+.project-card {
+  position: relative;
+}
+
 .project-card::after {
   content: '';
   position: absolute;
@@ -80,7 +83,23 @@
   z-index: 2;
 }
 
-/* Update gradient background for light mode */
+.project-card:hover::after {
+  opacity: 1;
+}
+
+/* Blog Post Styles */
+.blog-content {
+  @apply prose dark:prose-invert prose-lg max-w-none;
+  @apply prose-headings:text-foreground;
+  @apply prose-p:text-muted-foreground prose-p:leading-relaxed;
+  @apply prose-strong:text-foreground prose-strong:font-semibold;
+  @apply prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80;
+  @apply prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground;
+  @apply prose-ul:text-muted-foreground prose-ol:text-muted-foreground;
+  @apply prose-li:marker:text-primary;
+}
+
+/* Gradient Background */
 .gradient-bg {
   background: 
     radial-gradient(
@@ -95,56 +114,7 @@
     );
 }
 
-/* Update text styles for better light mode contrast */
-.light .text-muted-foreground {
-  color: hsl(215 25% 27% / 1);
-}
-
-.light .glass-card .text-muted-foreground {
-  color: hsl(215 25% 27% / 1);
-}
-
-/* Update tech tags for better light mode visibility */
-.light .tech-pill,
-.light .rounded-full.bg-muted\/50 {
-  background-color: hsl(var(--primary) / 0.1);
-  color: hsl(var(--primary));
-}
-
-/* Blog content specific styles for light mode */
-.light .blog-content {
-  color: hsl(222 47% 11%);
-}
-
-.light .blog-content h2,
-.light .blog-content h3 {
-  color: hsl(var(--primary));
-}
-
-.light .blog-content p {
-  color: hsl(215 25% 27% / 1);
-}
-
-/* Navigation link styles for light mode */
-.light .nav-link {
-  color: hsl(215 25% 27% / 1);
-}
-
-.light .nav-link:hover,
-.light .nav-link.active {
-  color: hsl(var(--primary));
-}
-
-/* Theme switch styles for light mode */
-.light .theme-switch {
-  background-color: hsl(var(--muted));
-}
-
-.light .theme-switch-icons svg {
-  color: hsl(var(--primary));
-}
-
-/* Keep your existing animations and other styles */
+/* Animations */
 .animate-in {
   animation: fadeIn 0.5s ease-out forwards;
 }
@@ -160,26 +130,26 @@
   }
 }
 
-/* Update divider for light mode */
-.light .divider {
+/* Blog List Item */
+.blog-item {
+  @apply glass-card rounded-xl p-6 transition-all duration-300;
+}
+
+.blog-item:hover {
+  @apply transform -translate-y-1;
+  box-shadow: 
+    0 20px 40px -8px hsl(var(--glow) / 0.2),
+    0 0 20px -4px hsl(var(--glow) / 0.3);
+}
+
+/* Tech Tags */
+.tech-tag {
+  @apply px-3 py-1 rounded-full text-sm;
   background: linear-gradient(
     to right,
-    transparent,
-    hsl(var(--primary) / 0.2),
-    transparent
+    hsl(var(--primary) / 0.1),
+    hsl(var(--primary) / 0.05)
   );
-}
-
-/* Blog navigation styles for light mode */
-.light .blog-nav a {
-  color: hsl(215 25% 27% / 1);
-}
-
-.light .blog-nav a:hover,
-.light .blog-nav a.active {
+  border: 1px solid hsl(var(--primary) / 0.2);
   color: hsl(var(--primary));
-}
-
-.light .blog-nav a::before {
-  background-color: hsl(var(--primary));
 }

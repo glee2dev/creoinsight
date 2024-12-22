@@ -10,36 +10,30 @@ export default function BlogPage() {
           Thoughts and insights on technology, AI, and innovation
         </p>
 
-        <div className="space-y-12">
+        <div className="space-y-8">
           {blogPosts.map((post, i) => (
             <article 
               key={post.id} 
-              className="animate-in border-b border-border pb-12 last:border-0"
+              className="animate-in"
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <Link href={`/blog/${post.id}`} className="group">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <Link href={`/blog/${post.id}`}>
+                <div className="blog-item">
+                  <div className="flex items-center gap-3 text-sm">
                     <span className="text-primary font-medium">{post.category}</span>
-                    <span>•</span>
-                    <time>{post.date}</time>
-                    <span>•</span>
-                    <span>{post.readTime}</span>
+                    <span className="text-muted-foreground">•</span>
+                    <time className="text-muted-foreground">{post.date}</time>
+                    <span className="text-muted-foreground">•</span>
+                    <span className="text-muted-foreground">{post.readTime}</span>
                   </div>
                   
-                  <h2 className="text-2xl font-bold group-hover:text-primary transition-colors">
+                  <h2 className="text-2xl font-bold mt-4 group-hover:text-primary transition-colors">
                     {post.title}
                   </h2>
                   
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
                     {post.excerpt}
                   </p>
-                  
-                  <div className="pt-4 flex items-center text-sm">
-                    <span className="text-primary group-hover:text-primary/80 transition-colors">
-                      Read more →
-                    </span>
-                  </div>
                 </div>
               </Link>
             </article>
