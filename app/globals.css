@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode colors */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 98%;
+  --card-foreground: 222 47% 11%;
+  --primary: 222 83% 45%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 222 83% 45%;
+  --accent-foreground: 222 47% 11%;
+  --border: 214.3 31.8% 91.4%;
+  --glow: 222 83% 45%;
+}
+
+.dark {
+  /* Dark mode colors - keeping your existing dark theme */
+  --background: 222 47% 4%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 6%;
+  --card-foreground: 210 40% 98%;
+  --primary: 150 100% 60%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 150 100% 60%;
+  --accent-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --glow: 150 100% 60%;
+}
+
+/* Update glass card styles for better light mode visibility */
+.glass-card {
+  background: linear-gradient(
+    to bottom right,
+    hsl(var(--card) / 0.9),
+    hsl(var(--card) / 0.8)
+  );
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light .glass-card {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05),
+              0 2px 4px -2px rgb(0 0 0 / 0.05);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: hsl(var(--primary) / 0.5);
+  box-shadow: 
+    0 20px 40px -8px hsl(var(--glow) / 0.2),
+    0 0 20px -4px hsl(var(--glow) / 0.3);
+}
+
+/* Update project card hover effect for light mode */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    hsl(var(--primary) / 0.15),
+    transparent 40%
+  );
+  border-radius: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Update gradient background for light mode */
+.gradient-bg {
+  background: 
+    radial-gradient(
+      circle at top right,
+      hsl(var(--primary) / 0.1),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      hsl(var(--primary) / 0.05),
+      transparent 50%
+    );
+}
+
+/* Update text styles for better light mode contrast */
+.light .text-muted-foreground {
+  color: hsl(215 25% 27% / 1);
+}
+
+.light .glass-card .text-muted-foreground {
+  color: hsl(215 25% 27% / 1);
+}
+
+/* Update tech tags for better light mode visibility */
+.light .tech-pill,
+.light .rounded-full.bg-muted\/50 {
+  background-color: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+
+/* Blog content specific styles for light mode */
+.light .blog-content {
+  color: hsl(222 47% 11%);
+}
+
+.light .blog-content h2,
+.light .blog-content h3 {
+  color: hsl(var(--primary));
+}
+
+.light .blog-content p {
+  color: hsl(215 25% 27% / 1);
+}
+
+/* Navigation link styles for light mode */
+.light .nav-link {
+  color: hsl(215 25% 27% / 1);
+}
+
+.light .nav-link:hover,
+.light .nav-link.active {
+  color: hsl(var(--primary));
+}
+
+/* Theme switch styles for light mode */
+.light .theme-switch {
+  background-color: hsl(var(--muted));
+}
+
+.light .theme-switch-icons svg {
+  color: hsl(var(--primary));
+}
+
+/* Keep your existing animations and other styles */
+.animate-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Update divider for light mode */
+.light .divider {
+  background: linear-gradient(
+    to right,
+    transparent,
+    hsl(var(--primary) / 0.2),
+    transparent
+  );
+}
+
+/* Blog navigation styles for light mode */
+.light .blog-nav a {
+  color: hsl(215 25% 27% / 1);
+}
+
+.light .blog-nav a:hover,
+.light .blog-nav a.active {
+  color: hsl(var(--primary));
+}
+
+.light .blog-nav a::before {
+  background-color: hsl(var(--primary));
+}
