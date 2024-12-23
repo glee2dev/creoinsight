@@ -13,7 +13,7 @@ Visit [CreoInsight](https://creoinsight.pages.dev)
 - **Theme:** next-themes for dark/light mode
 - **Icons:** Heroicons
 - **Animations:** Framer Motion
-- **Deployment:** Cloudflare Pages
+- **Deployment:** Vercel
 
 ## ✨ Features
 
