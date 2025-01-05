@@ -72,47 +72,49 @@ export default function Navbar() {
       <div 
         className={`
           fixed inset-0 z-50 md:hidden
-          transition-opacity duration-300
+          transition-opacity duration-500
           ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
         `}
       >
         {/* Backdrop */}
         <div 
-          className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/50"
           onClick={() => setIsMenuOpen(false)}
         />
 
         {/* Menu Panel */}
         <div 
           className={`
-            absolute right-0 top-0 h-full w-64
-            bg-background border-l border-border
-            transform transition-transform duration-300
+            absolute right-0 top-0 h-full w-72
+            bg-background/50 backdrop-blur-xl
+            rounded-l-2xl shadow-2xl
+            transform transition-all duration-500 ease-out
             ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
           `}
         >
-          <div className="p-4 flex justify-end">
+          <div className="p-6 flex justify-end">
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="p-2 rounded-full hover:bg-muted transition-colors"
+              className="p-2 rounded-full hover:bg-muted/80 transition-colors"
               aria-label="Close menu"
             >
               <XMarkIcon className="h-5 w-5" />
             </button>
           </div>
 
-          <div className="px-4 py-2 space-y-1">
+          <div className="px-6 py-4 space-y-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
                 className={`
-                  block px-4 py-3 rounded-lg
-                  text-sm font-medium transition-colors
+                  block px-4 py-3 rounded-xl
+                  text-sm font-medium
+                  transition-all duration-200 ease-out
                   ${pathname === item.href
-                    ? 'bg-muted text-primary'
-                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    ? 'bg-primary/20 text-primary translate-x-2'
+                    : 'text-foreground hover:bg-muted/80 hover:translate-x-2'
                   }
                 `}
               >
