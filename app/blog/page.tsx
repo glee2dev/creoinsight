@@ -1,6 +1,6 @@
-import { getAllBlogPosts } from '@/utils/blog'
+import { getAllBlogPosts } from '../../utils/blog'
 import { Metadata } from 'next'
-import BlogList from '@/components/blog-list'
+import BlogList from '../../components/blog-list'
 
 export const metadata: Metadata = {
   title: "Blog Posts | CreoInsight",

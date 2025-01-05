@@ -1,9 +1,9 @@
 'use client'
 
-import { projects } from '@/data/projects'
+import { projects } from '../../../data/projects'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import ImageSlider from '@/components/image-slider'
+import ImageSlider from '../../../components/image-slider'
 
 interface ProjectPageProps {
   params: { slug: string }

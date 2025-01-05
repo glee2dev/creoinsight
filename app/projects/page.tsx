@@ -1,6 +1,6 @@
-import { projects } from '@/data/projects'
+import { projects } from '../../data/projects'
 import { Metadata } from 'next'
-import ProjectList from '@/components/project-list'
+import ProjectList from '../../components/project-list'
 
 export const metadata: Metadata = {
   title: "Projects | CreoInsight",

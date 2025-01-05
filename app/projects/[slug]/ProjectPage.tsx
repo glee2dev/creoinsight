@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import { projects } from '@/data/projects'
+import ImageSlider from '@/components/image-slider'
 
 interface ProjectPageProps {
   slug: string
@@ -25,8 +26,9 @@ export default function ProjectPage({ slug }: ProjectPageProps) {
           Back to Projects
         </Link>
 
-        <article className="glass-card rounded-xl p-8">
-          <header className="mb-8">
+        <article className="space-y-12">
+          {/* Header */}
+          <header>
             <h1 className="text-4xl font-bold text-primary mb-4">
               {project.title}
             </h1>
@@ -39,41 +41,52 @@ export default function ProjectPage({ slug }: ProjectPageProps) {
             </div>
           </header>
 
-          <div className="prose dark:prose-invert max-w-none">
+          {/* Image Slider */}
+          {project.images && project.images.length > 0 && (
+            <div className="glass-card p-4 animate-in">
+              <ImageSlider images={project.images} />
+            </div>
+          )}
+
+          {/* Project Overview */}
+          <div className="glass-card rounded-xl p-8 animate-in">
+            <h2 className="text-2xl font-semibold mb-4">Project Overview</h2>
             <p className="text-lg text-muted-foreground">
               {project.description}
             </p>
+          </div>
 
-            <div className="mt-8">
-              <h2 className="text-2xl font-semibold text-primary mb-4">Technologies</h2>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <span 
-                    key={tech}
-                    className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+          {/* Technologies */}
+          <div className="glass-card rounded-xl p-8 animate-in">
+            <h2 className="text-2xl font-semibold mb-6">Technologies Used</h2>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <span 
+                  key={tech}
+                  className="px-4 py-2 rounded-full bg-muted/50 backdrop-blur-sm text-muted-foreground"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
+          </div>
 
-            {project.features && (
-              <div className="mt-12">
-                <h2 className="text-2xl font-semibold text-primary mb-6">Key Features</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {project.features.map((feature, index) => (
-                    <div 
-                      key={index}
-                      className="glass-card rounded-xl p-6"
-                    >
-                      <h3 className="text-lg font-semibold mb-3">{feature.title}</h3>
-                      <p className="text-muted-foreground">{feature.description}</p>
-                    </div>
-                  ))}
+          {/* Key Tasks */}
+          <div className="glass-card rounded-xl p-8 animate-in">
+            <h2 className="text-2xl font-semibold mb-6">Key Tasks & Achievements</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {project.tasks.map((task, index) => (
+                <div 
+                  key={index}
+                  className="p-4 rounded-lg bg-muted/50 backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-2 h-2 rounded-full bg-primary shrink-0"></span>
+                    <span className="text-muted-foreground">{task}</span>
+                  </div>
                 </div>
-              </div>
-            )}
+              ))}
+            </div>
           </div>
         </article>
       </div>
