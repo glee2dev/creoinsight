@@ -1,13 +1,15 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
+import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigation = [
     { name: 'Blog', href: '/blog' },
@@ -25,7 +27,8 @@ export default function Navbar() {
           CreoInsight
         </Link>
 
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4">
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {navigation.map((item) => (
               <Link
@@ -53,8 +56,72 @@ export default function Navbar() {
               <MoonIcon className="h-5 w-5" />
             )}
           </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="md:hidden p-2 -mr-2 rounded-full hover:bg-muted transition-colors"
+            aria-label="Open menu"
+          >
+            <Bars3Icon className="h-5 w-5" />
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Navigation */}
+      <div 
+        className={`
+          fixed inset-0 z-50 md:hidden
+          transition-opacity duration-300
+          ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+        `}
+      >
+        {/* Backdrop */}
+        <div 
+          className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+          onClick={() => setIsMenuOpen(false)}
+        />
+
+        {/* Menu Panel */}
+        <div 
+          className={`
+            absolute right-0 top-0 h-full w-64
+            bg-background border-l border-border
+            transform transition-transform duration-300
+            ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+          `}
+        >
+          <div className="p-4 flex justify-end">
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 rounded-full hover:bg-muted transition-colors"
+              aria-label="Close menu"
+            >
+              <XMarkIcon className="h-5 w-5" />
+            </button>
+          </div>
+
+          <div className="px-4 py-2 space-y-1">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className={`
+                  block px-4 py-3 rounded-lg
+                  text-sm font-medium transition-colors
+                  ${pathname === item.href
+                    ? 'bg-muted text-primary'
+                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  }
+                `}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
     </header>
   )
 }

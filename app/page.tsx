@@ -1,9 +1,12 @@
 import Link from 'next/link'
-import { blogPosts } from '@/data/blog'
+import { getAllBlogPosts } from '@/utils/blog'
 import { projects } from '@/data/projects'
 
-export default function Home() {
-  const recentPosts = blogPosts.slice(0, 3)
+export const revalidate = 3600 // Revalidate every hour
+
+export default async function Home() {
+  const allPosts = await getAllBlogPosts()
+  const recentPosts = allPosts.slice(0, 3)
   const featuredProjects = projects.slice(0, 3)
 
   return (
@@ -39,7 +42,7 @@ export default function Home() {
                     className="animate-in border-b border-border pb-8 last:border-0"
                     style={{ animationDelay: `${i * 100}ms` }}
                   >
-                    <Link href={`/blog/${post.id}`} className="group">
+                    <Link href={`/blog/${post.slug}`} className="group">
                       <div className="space-y-3">
                         <div className="flex items-center gap-3 text-sm text-muted-foreground">
                           <span className="text-primary font-medium">{post.category}</span>

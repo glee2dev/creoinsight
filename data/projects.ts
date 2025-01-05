@@ -1,56 +1,129 @@
-export const projects = [
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  shortDescription?: string;
+  duration: string;
+  role: string;
+  category: string;
+  technologies: string[];
+  tasks: string[];
+  images?: {
+    src: string;
+    alt: string;
+  }[];
+}
+
+export const projects: Project[] = [
   {
-    id: 'ai-healthcare',
-    title: "AI-Powered Healthcare Platform",
-    description: "A comprehensive healthcare platform leveraging artificial intelligence for improved patient care and medical diagnosis. The system uses deep learning models to analyze medical imaging and patient data for early disease detection and personalized treatment recommendations.",
-    shortDescription: "AI-powered platform for improved patient care and medical diagnosis using deep learning.",
-    technologies: ["Python", "TensorFlow", "React", "Node.js", "Docker"],
-    category: "Healthcare & AI",
-    duration: "2023 - Present",
-    role: "Lead Developer",
-    features: [
+    id: "creoinsight-portfolio",
+    title: "CreoInsight Portfolio",
+    description: "A modern portfolio and blog platform built with Next.js, featuring dynamic content management, dark mode support, and responsive design.",
+    shortDescription: "Modern portfolio and blog platform with dynamic content management",
+    duration: "2024",
+    role: "Full Stack Developer",
+    category: "Web Development",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Markdown",
+      "React"
+    ],
+    tasks: [
+      "System Architecture & Component Design",
+      "Dynamic Content Management System",
+      "Dark Mode Implementation",
+      "Performance Optimization",
+      "Responsive Layout Development"
+    ],
+    images: [
       {
-        title: "AI Diagnosis Assistance",
-        description: "Implemented machine learning models for analyzing medical imaging and providing preliminary diagnosis suggestions with 95% accuracy."
+        src: "/projects/creoinsight/home.png",
+        alt: "CreoInsight Homepage"
       },
       {
-        title: "Real-time Patient Monitoring",
-        description: "Developed a real-time monitoring system using WebSocket for continuous patient vital signs tracking and instant alerts."
+        src: "/projects/creoinsight/blog.png",
+        alt: "Blog Section"
       },
       {
-        title: "Secure Data Management",
-        description: "Created a HIPAA-compliant data management system with end-to-end encryption and audit logging."
+        src: "/projects/creoinsight/projects.png",
+        alt: "Projects Gallery"
       }
     ]
   },
   {
-    id: 'blockchain-trading',
-    title: "Blockchain Trading System",
-    description: "Developed a secure cryptocurrency trading platform using blockchain technology. Features include real-time price tracking, automated trading strategies, and secure wallet integration with support for multiple cryptocurrencies.",
-    shortDescription: "Secure cryptocurrency trading platform with automated strategies and multi-wallet support.",
-    technologies: ["Solidity", "Ethereum", "Web3.js", "Next.js", "TypeScript"],
-    category: "Blockchain & Finance",
-    duration: "2022 - 2023",
-    role: "Full Stack Developer"
+    id: "sentiment-analyzer",
+    title: "AI Sentiment Analyzer",
+    description: "A machine learning-based sentiment analysis system that processes text data to determine emotional tone and sentiment, with support for multiple languages and real-time analysis.",
+    shortDescription: "ML-powered sentiment analysis system with multilingual support",
+    duration: "2023",
+    role: "ML Engineer",
+    category: "Machine Learning",
+    technologies: [
+      "Python",
+      "TensorFlow",
+      "BERT",
+      "FastAPI",
+      "Docker"
+    ],
+    tasks: [
+      "Model Architecture Design",
+      "Training Pipeline Development",
+      "Multi-language Support Integration",
+      "API Development & Documentation",
+      "Performance Monitoring System"
+    ],
+    images: [
+      {
+        src: "/projects/sentiment-analyzer/dashboard.png",
+        alt: "Analysis Dashboard"
+      },
+      {
+        src: "/projects/sentiment-analyzer/results.png",
+        alt: "Analysis Results"
+      },
+      {
+        src: "/projects/sentiment-analyzer/metrics.png",
+        alt: "Performance Metrics"
+      }
+    ]
   },
   {
-    id: 'ml-analytics',
-    title: "Machine Learning Analytics Dashboard",
-    description: "Real-time analytics dashboard utilizing machine learning for predictive insights and data visualization.",
-    shortDescription: "Real-time analytics dashboard with ML-powered predictive insights.",
-    technologies: ["Python", "scikit-learn", "D3.js", "Flask", "PostgreSQL"],
-    category: "Data Analytics",
-    duration: "2022",
-    role: "ML Engineer"
-  },
-  {
-    id: 'iot-monitoring',
-    title: "IoT Environmental Monitoring",
-    description: "IoT-based environmental monitoring system using distributed sensors. Collects and analyzes data about air quality, temperature, humidity, and other environmental factors in real-time.",
-    shortDescription: "IoT system for real-time environmental monitoring and analysis.",
-    technologies: ["Arduino", "AWS IoT", "React", "MongoDB", "Node.js"],
-    category: "IoT & Cloud",
-    duration: "2021 - 2022",
-    role: "IoT Developer"
+    id: "mobile-fitness-app",
+    title: "FitTrack Pro",
+    description: "A comprehensive fitness tracking mobile application that helps users monitor workouts, nutrition, and progress with personalized recommendations and social features.",
+    shortDescription: "Comprehensive fitness tracking app with personalized recommendations",
+    duration: "2023",
+    role: "Mobile Developer",
+    category: "Mobile Apps",
+    technologies: [
+      "React Native",
+      "TypeScript",
+      "Redux",
+      "Node.js",
+      "MongoDB"
+    ],
+    tasks: [
+      "UI/UX Implementation",
+      "State Management Architecture",
+      "Real-time Data Synchronization",
+      "Social Features Integration",
+      "Analytics Dashboard Development"
+    ],
+    images: [
+      {
+        src: "/projects/fittrack/home.png",
+        alt: "FitTrack Home Screen"
+      },
+      {
+        src: "/projects/fittrack/workout.png",
+        alt: "Workout Tracking"
+      },
+      {
+        src: "/projects/fittrack/progress.png",
+        alt: "Progress Analytics"
+      }
+    ]
   }
 ]
