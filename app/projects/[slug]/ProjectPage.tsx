@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import { projects } from '@/data/projects'
+import { Project, getProjectById } from '@/utils/projects'
 import ImageSlider from '@/components/image-slider'
 
 interface ProjectPageProps {
@@ -11,9 +11,47 @@ interface ProjectPageProps {
 }
 
 export default function ProjectPage({ slug }: ProjectPageProps) {
-  const project = projects.find(p => p.id === slug)
+  const [project, setProject] = useState<Project | null>(null)
+  const [loading, setLoading] = useState(true)
 
-  if (!project) return <div>Project not found</div>
+  useEffect(() => {
+    async function loadProject() {
+      const projectData = await getProjectById(slug)
+      setProject(projectData)
+      setLoading(false)
+    }
+    loadProject()
+  }, [slug])
+
+  if (loading) {
+    return (
+      <div className="pt-24 pb-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse space-y-8">
+            <div className="h-8 w-1/3 bg-muted rounded"></div>
+            <div className="h-4 w-1/4 bg-muted rounded"></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!project) return (
+    <div className="pt-24 pb-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="glass-card rounded-xl p-8">
+          <h1 className="text-2xl font-bold">Project not found</h1>
+          <Link 
+            href="/projects" 
+            className="mt-4 inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+          >
+            <ArrowLeftIcon className="w-4 h-4 mr-2" />
+            Back to Projects
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
 
   return (
     <div className="pt-24 pb-16">
@@ -88,6 +126,12 @@ export default function ProjectPage({ slug }: ProjectPageProps) {
               ))}
             </div>
           </div>
+
+          {/* Detailed Content */}
+          <div 
+            className="prose prose-neutral dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: project.content }}
+          />
         </article>
       </div>
     </div>

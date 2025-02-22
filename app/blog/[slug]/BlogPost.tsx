@@ -3,15 +3,25 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import { blogPosts } from '@/data/blog'
+import { BlogPost as BlogPostType, getBlogPostBySlug } from '@/utils/blog'
 
 interface BlogPostProps {
   slug: string
 }
 
 export default function BlogPost({ slug }: BlogPostProps) {
-  const post = blogPosts.find(p => p.id === slug)
+  const [post, setPost] = useState<BlogPostType | null>(null)
   const [activeHeading, setActiveHeading] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadPost() {
+      const postData = await getBlogPostBySlug(slug)
+      setPost(postData)
+      setLoading(false)
+    }
+    loadPost()
+  }, [slug])
 
   useEffect(() => {
     if (!post) return
@@ -32,6 +42,21 @@ export default function BlogPost({ slug }: BlogPostProps) {
 
     return () => headings.forEach(heading => observer.unobserve(heading))
   }, [post])
+
+  if (loading) {
+    return (
+      <div className="pt-24 pb-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="glass-card rounded-xl p-8">
+            <div className="animate-pulse">
+              <div className="h-8 w-1/3 bg-muted rounded mb-4"></div>
+              <div className="h-4 w-1/4 bg-muted rounded"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (!post) {
     return (
@@ -83,7 +108,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
           </header>
 
           <div 
-            className="blog-content"
+            className="blog-content prose prose-neutral dark:prose-invert max-w-none"
             dangerouslySetInnerHTML={{ 
               __html: post.content.replace(/<h([23])>(.*?)<\/h\1>/g, (_, level, content) => {
                 const id = content.toLowerCase().replace(/\s+/g, '-')
