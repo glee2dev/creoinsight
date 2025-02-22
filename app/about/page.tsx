@@ -80,6 +80,7 @@ export default function About() {
               I also write about AI, design, and the lessons I've learned from working across disciplines.
               If you're interested in the intersection of <span className="text-primary font-medium">technology and creativity</span>, you might enjoy my insights.
             </p>
+
           </div>
         </motion.section>
 
@@ -92,9 +93,10 @@ export default function About() {
           <h2 className="text-2xl font-bold mb-6 text-primary">Fun Facts</h2>
           <ul className="space-y-4">
             {[
-              "I once worked on a secret Ferrari design project.",
+              "I once worked as Car Designer and compete in Ferrari Top Design Challenge.",
               "My first AI experiment was turning car sketches into 3D models.",
-              "I make a mean Korean BBQ at home. 🔥"
+              "I make a mean Korean BBQ at home. 🔥",
+              "This website? Yes, AI generated."
             ].map((fact, index) => (
               <li key={index} className="flex items-center gap-3 p-4 rounded-lg bg-muted/50 backdrop-blur-sm">
                 <span className="w-2 h-2 rounded-full bg-primary shrink-0"></span>
@@ -166,6 +168,7 @@ export default function About() {
               </a>
             </div>
           </div>
+          
         </motion.section>
       </div>
     </div>

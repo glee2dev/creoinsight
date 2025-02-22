@@ -1,6 +1,4 @@
-'use client'
-
-import { projects } from '../../../data/projects'
+import { getProjectById, getAllProjects } from '../../../utils/projects'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import ImageSlider from '../../../components/image-slider'
@@ -9,8 +7,9 @@ interface ProjectPageProps {
   params: { slug: string }
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = projects.find(p => p.id === params.slug)
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const project = await getProjectById(params.slug)
+  const allProjects = await getAllProjects()
 
   if (!project) {
     return notFound()
@@ -90,12 +89,18 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </div>
 
+          {/* Detailed Content */}
+          <div 
+            className="prose prose-neutral dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: project.content }}
+          />
+
           {/* Project Navigation */}
           <nav className="flex justify-between items-center pt-8 border-t border-border">
-            {projects.map((p, i) => {
+            {allProjects.map((p, i) => {
               if (p.id === project.id) {
-                const prevProject = projects[i - 1];
-                const nextProject = projects[i + 1];
+                const prevProject = allProjects[i - 1];
+                const nextProject = allProjects[i + 1];
 
                 return (
                   <div key={p.id} className="flex justify-between w-full">

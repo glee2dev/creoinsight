@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Project } from '@/data/projects'
+import { Project } from '@/utils/projects'
 
 interface ProjectListProps {
   projects: Project[]

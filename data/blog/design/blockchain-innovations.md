@@ -3,7 +3,7 @@ id: 'blockchain-innovations'
 title: "Recent Innovations in Blockchain"
 date: "2024-01-05"
 readTime: "7 min read"
-category: "Blockchain"
+category: "Design"
 excerpt: "Analyzing recent developments in blockchain technology and their impact on decentralized applications."
 ---
 ## Blockchain Evolution

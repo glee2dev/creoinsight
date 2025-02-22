@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import { getAllBlogPosts } from '@/utils/blog'
-import { projects } from '@/data/projects'
+import { getAllProjects } from '@/utils/projects'
 
 export const revalidate = 3600 // Revalidate every hour
 
 export default async function Home() {
   const allPosts = await getAllBlogPosts()
+  const allProjects = await getAllProjects()
   const recentPosts = allPosts.slice(0, 3)
-  const featuredProjects = projects.slice(0, 3)
+  const featuredProjects = allProjects.slice(0, 3)
 
   return (
     <div className="pt-24 pb-16">

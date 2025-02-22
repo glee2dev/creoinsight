@@ -1,6 +1,6 @@
-import { projects } from '../../data/projects'
 import { Metadata } from 'next'
 import ProjectList from '../../components/project-list'
+import { getAllProjects } from '../../utils/projects'
 
 export const metadata: Metadata = {
   title: "Projects | CreoInsight",
@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600 // Revalidate every hour
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getAllProjects()
+  
   return (
     <div className="pt-24 pb-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

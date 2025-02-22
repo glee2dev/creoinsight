@@ -3,7 +3,7 @@ id: "modern-web-architecture"
 title: "Understanding Modern Web Architecture"
 date: "2024-01-15"
 readTime: "8 min read"
-category: "Web Development"
+category: "Scribbles"
 excerpt: "A deep dive into modern web architecture patterns and best practices for scalable applications."
 ---
 
